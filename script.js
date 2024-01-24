@@ -47,7 +47,9 @@ const CourseInfo = {
       }
     ]
   };
-  
+  console.log(AssignmentGroup.assignments);
+  console.log(AssignmentGroup.assignments['id']);
+
   // The provided learner submission data.
   const LearnerSubmissions = [
 //do not change
@@ -103,8 +105,7 @@ const CourseInfo = {
         // here, we would process this data to achieve the desired result.
         // Our code here, manioulate the data, do not change it
         //Does not have to be in a specific order
-        (CourseInfo, AssignmentGroup, [LearnerSubmission])
-              let currentDate = AssignmentGroup["due_at"];
+        
 
     //if the assignment is past due then deduct 10%
         if(submitted_at != due_at){
@@ -120,22 +121,19 @@ const CourseInfo = {
             throw new Error('Cannot divide by 0');
           }
         }
-          if (currentDate < dueDate){
+        let dueDate = new Date(assignment.due_at);
+        let currentDate = new Date();
+          if (currentDate > AssignmentGroup['assignments']].due_at){
             //skip assignment if it isn't due
-            let currentDate = LearnerSubmissions['AssignmentGroup'].due_at;
             return;
           }
-
-    let score = function(submission,score, points_possible) {
-       return submission.score / points_possible;
+          //calculate the average score per learner
+        let score = function(submission.score, points_possible) {
+            return submission.score / points_possible;
+            //
+            console.log(learner_id)
 
     }
-
-LearnerSubmissions.forEach((LearnerSubmission) => {
-    console.log(LearnerSubmission.score)
-})
-
-
 
 
     //test case: to demonstrate the desired output; not final code
