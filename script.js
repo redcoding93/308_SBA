@@ -1,5 +1,14 @@
 
+// If an AssignmentGroup does not belong to its course (mismatching course_id), your program should throw an error, letting the user know that the input was invalid. Similar data validation should occur elsewhere within the program.
 
+
+// You should also account for potential errors in the data that your program receives. What if points_possible is 0? You cannot divide by zero. What if a value that you are expecting to be a number is instead a string? // Use try/catch and other logic to handle these types of errors gracefully (no crashing due to errors)
+
+// If an assignment is not yet due, do not include it in the results or the average. 
+// Additionally, if the learner’s submission is late (submitted_at is past due_at), deduct 10 percent of the total points possible from their score for that assignment.
+
+// Create a function named getLearnerData() that accepts these values as parameters, in the order listed: (CourseInfo, AssignmentGroup, [LearnerSubmission]), and returns the formatted result, which should be an array of objects as described above.
+//if the asignment is not due, its not part of the grade average
 
 
 
@@ -33,7 +42,7 @@ const CourseInfo = {
       {
         id: 3,
         name: "Code the World",
-        due_at: "3156-11-15",
+        due_at: "3156-11-15",//never due, basically
         points_possible: 500
       }
     ]
@@ -84,29 +93,114 @@ const CourseInfo = {
       }
     }
   ];
-  
-  function getLearnerData(course, ag, submissions) {
-    // here, we would process this data to achieve the desired result.
-    // Our code here, manioulate the data, do not change it
-    const result = [
-      {
-        id: 125,
-        avg: 0.985, // (47 + 150) / (50 + 150)
-        1: 0.94, // 47 / 50
-        2: 1.0 // 150 / 150
-      },
-      {
-        id: 132,
-        avg: 0.82, // (39 + 125) / (50 + 150)
-        1: 0.78, // 39 / 50
-        2: 0.833 // late: (140 - 15) / 150
-      }
-    ];
-  
-    return result;
+  //looping over assignment group. How do I access the assignment objects?
+  for (const [key, value] of Object.entries(AssignmentGroup)) {
+    console.log(`${key}: ${value}`);
   }
-  
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-  
-  console.log(result);
-  
+
+
+    function getLearnerData(course, ag, submissions) {
+        // here, we would process this data to achieve the desired result.
+        // Our code here, manioulate the data, do not change it
+        //Does not have to be in a specific order
+        (CourseInfo, AssignmentGroup, [LearnerSubmission])
+              let currentDate = AssignmentGroup["due_at"];
+
+    //if the assignment is past due then deduct 10%
+        if(submitted_at != due_at){
+           let late = LearnerSubmissions['score'] * .10;
+           console.log(late)
+
+        }
+        // graceful error messages
+        if (course_id != CourseInfo.id ) {
+            throw new Error('Does not match');
+          }
+          if (points_possible = 0 ) {
+            throw new Error('Cannot divide by 0');
+          }
+        }
+          if (currentDate < dueDate){
+            //skip assignment if it isn't due
+            let currentDate = LearnerSubmissions['AssignmentGroup'].due_at;
+            return;
+          }
+
+    let score = function(submission,score, points_possible) {
+       return submission.score / points_possible;
+
+    }
+
+LearnerSubmissions.forEach((LearnerSubmission) => {
+    console.log(LearnerSubmission.score)
+})
+
+
+
+
+    //test case: to demonstrate the desired output; not final code
+            // here, we would process this data to achieve the desired result.
+        // Our code here, manioulate the data, do not change it
+        // Does not have to be in a specific order
+        function getLearnerData(course, ag, submissions) {
+            // here, we would process this data to achieve the desired result.
+            //         // here, we would process this data to achieve the desired result.
+//         // Our code here, manioulate the data, do not change it
+//         //Does not have to be in a specific order
+            (CourseInfo, AssignmentGroup, [LearnerSubmission])
+        
+        //if the assignment is past due then deduct 10%
+        function name(submission, due_at) {
+            if(submitted_at != due_at){
+                let late =  .10;
+                console.log(late)
+                    return Math.max(submission - (submission * late), 0);
+                }
+        }
+        
+            // graceful error messages
+            if (course_id != CourseInfo.id ) {
+                throw new Error('Does not match');
+            }
+            if (points_possible = 0 ) {
+                throw new Error('Cannot divide by 0');
+            }
+            
+            function weightedAverage(params) {
+                
+            }
+
+        //let score = function(LearnerSubmission.score, points_possible) {
+        return submission.score / points_possible;
+
+        }
+
+    LearnerSubmissions.forEach((LearnerSubmission) => {
+        //console.log(LearnerSubmission.score)
+
+
+
+    })
+          
+          //}
+
+          
+          const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+          
+          console.log(result);
+          
+        //   Test result
+        //   const result = [
+        //     {
+        //       id: 125,
+        //       avg: 0.985, // (47 + 150) / (50 + 150)
+        //       1: 0.94, // 47 / 50
+        //       2: 1.0 // 150 / 150
+        //     },
+        //     {
+        //       id: 132,
+        //       avg: 0.82, // (39 + 125) / (50 + 150)
+        //       1: 0.78, // 39 / 50
+        //       2: 0.833 // late: (140 - 15) / 150
+        //     }
+        //   ];
