@@ -76,7 +76,7 @@ const CourseInfo = {
       }
     }
   ];
-
+  function getLearnerData(course, ag, submissions) {
   
     //    = AssignmentGroup.assignments[2].points_possible 
     //   let y = LearnerSubmissions[4].submission['score'];
@@ -101,15 +101,19 @@ const CourseInfo = {
   console.log(ag1());
   //Calculates the course average for student 132
 
-  function ag2(x,y,z) {
+  function ag2(c,d,z) {
     console.log("student_id:" + LearnerSubmissions[3].learner_id)
     c = LearnerSubmissions[3].submission['score'] / AssignmentGroup.assignments[0].points_possible; // 39 / 50
+    return "1:" + c;
+    //problem: javascript can only return one item per function
    //console.log(y);
-    d = LearnerSubmissions[4].submission['score'] / AssignmentGroup.assignments[1].points_possible; // 140/160
+    d = LearnerSubmissions[4].submission['score'] -15 // 140/160
+    console.log(d) ;
     z = AssignmentGroup.group_weight;
    //return (x/y) * z;
-   return "1:" + c;
-   return c+d / 200;
+   
+   
+   //return c+d / 200;
    return d;
    //console.log(x);
    //console.log(x/y);
@@ -141,7 +145,7 @@ const CourseInfo = {
      if (AssignmentGroup.course_id != CourseInfo.id ) {
          throw new Error('Does not match');
        }
-       //throws an error when dividinf by zero for points possible
+       //throws an error when dividing by zero for points possible
        if (points_possible = 0 ) {
          throw new Error('Cannot divide by 0');
        }
@@ -153,16 +157,16 @@ const CourseInfo = {
            return;
          }
      
-  function getLearnerData(course, ag, submissions) {
+ 
     // here, we would process this data to achieve the desired result.
 //attempting to push the functions ag1 and ag2 into an object within an array
   let array = [];
   if (ag1 || ag2){
 	array.push([ag1, ag2]);
 }
-
 console.log(array)
-    //return the average scores per assignment for each student
+
+    //return the functions calculating the average scores per assignment for each student
     return ag1
     return ag2
   
