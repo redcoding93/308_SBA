@@ -93,8 +93,8 @@ const CourseInfo = {
 
 
      z = AssignmentGroup.group_weight;
-     return y;
-    return ((+a+b) / x) * z;
+     return "1:" + y;
+    //return ((a+b) / x) * z;
     //console.log(x);
     //console.log(x/y);
   }
@@ -103,11 +103,14 @@ const CourseInfo = {
 
   function ag2(x,y,z) {
     console.log("student_id:" + LearnerSubmissions[3].learner_id)
-
+    c = LearnerSubmissions[3].submission['score'] / AssignmentGroup.assignments[0].points_possible; // 39 / 50
    //console.log(y);
-    y = LearnerSubmissions[4].submission['score'] / AssignmentGroup.assignments[2].points_possible;
+    d = LearnerSubmissions[4].submission['score'] / AssignmentGroup.assignments[1].points_possible; // 140/160
     z = AssignmentGroup.group_weight;
-   return (x/y) * z;
+   //return (x/y) * z;
+   return "1:" + c;
+   return c+d / 200;
+   return d;
    //console.log(x);
    //console.log(x/y);
  }
