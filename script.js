@@ -1,19 +1,4 @@
-
-// If an AssignmentGroup does not belong to its course (mismatching course_id), your program should throw an error, letting the user know that the input was invalid. Similar data validation should occur elsewhere within the program.
-
-
-// You should also account for potential errors in the data that your program receives. What if points_possible is 0? You cannot divide by zero. What if a value that you are expecting to be a number is instead a string? // Use try/catch and other logic to handle these types of errors gracefully (no crashing due to errors)
-
-// If an assignment is not yet due, do not include it in the results or the average. 
-// Additionally, if the learner’s submission is late (submitted_at is past due_at), deduct 10 percent of the total points possible from their score for that assignment.
-
-// Create a function named getLearnerData() that accepts these values as parameters, in the order listed: (CourseInfo, AssignmentGroup, [LearnerSubmission]), and returns the formatted result, which should be an array of objects as described above.
-//if the asignment is not due, its not part of the grade average
-
-
-
 // The provided course information.
-//do not change the project data given
 const CourseInfo = {
     id: 451,
     name: "Introduction to JavaScript"
@@ -21,7 +6,6 @@ const CourseInfo = {
   
   // The provided assignment group.
   const AssignmentGroup = {
-    //do not change
     id: 12345,
     name: "Fundamentals of JavaScript",
     course_id: 451,
@@ -42,18 +26,15 @@ const CourseInfo = {
       {
         id: 3,
         name: "Code the World",
-        due_at: "3156-11-15",//never due, basically
+        due_at: "3156-11-15",
         points_possible: 500
       }
     ]
   };
-  console.log(AssignmentGroup.assignments);
-  console.log(AssignmentGroup.assignments['id']);
-
+//   let y = AssignmentGroup.assignments[2].points_possible;
+//   console.log(y);
   // The provided learner submission data.
   const LearnerSubmissions = [
-//do not change
-
     {
       learner_id: 125,
       assignment_id: 1,
@@ -95,110 +76,107 @@ const CourseInfo = {
       }
     }
   ];
-  //looping over assignment group. How do I access the assignment objects?
-  for (const [key, value] of Object.entries(AssignmentGroup)) {
-    console.log(`${key}: ${value}`);
+
+  
+    //    = AssignmentGroup.assignments[2].points_possible 
+    //   let y = LearnerSubmissions[4].submission['score'];
+
+//Attempting to calculate the weighted average per student id    
+//Calculates the course average for student 125
+  function ag1(x,y,z) {
+    console.log("student_id:" + LearnerSubmissions[0].learner_id)
+    //console.log(y);
+     y = LearnerSubmissions[0].submission['score'] / AssignmentGroup.assignments[0].points_possible 
+     ; // 47
+     a = LearnerSubmissions[1].submission['score']; // 150
+     b = LearnerSubmissions[2].submission['score']; // 400
+
+
+     z = AssignmentGroup.group_weight;
+     return y;
+    return ((+a+b) / x) * z;
+    //console.log(x);
+    //console.log(x/y);
   }
+  console.log(ag1());
+  //Calculates the course average for student 132
+
+  function ag2(x,y,z) {
+    console.log("student_id:" + LearnerSubmissions[3].learner_id)
+
+   //console.log(y);
+    y = LearnerSubmissions[4].submission['score'] / AssignmentGroup.assignments[2].points_possible;
+    z = AssignmentGroup.group_weight;
+   return (x/y) * z;
+   //console.log(x);
+   //console.log(x/y);
+ }
+ console.log(ag2());
+
+   //Calculates the course average for student 3
+
+  //as as it looks like the output in the example it  doesn't matter how it gets there
+  //console.log(average);
 
 
-    function getLearnerData(course, ag, submissions) {
-        // here, we would process this data to achieve the desired result.
-        // Our code here, manioulate the data, do not change it
-        //Does not have to be in a specific order
-        
+//if id = x, console.log(y);
+//   console.log(Object.keys(AssignmentGroup.assignments));
+//   console.log(Object.values(AssignmentGroup.assignments));
+//   for (const key of Object.keys(AssignmentGroup.assignments)) {
+//         console.log(`${key} => ${AssignmentGroup[key]}`);    
+ // }
 
     //if the assignment is past due then deduct 10%
-        if(submitted_at != due_at){
-           let late = LearnerSubmissions['score'] * .10;
-           console.log(late)
+    if(LearnerSubmissions.submitted_at != AssignmentGroup. assignments.due_at){
+        let late = LearnerSubmissions['score'] * .10;
+        console.log(late)
 
-        }
-        // graceful error messages
-        if (course_id != CourseInfo.id ) {
-            throw new Error('Does not match');
-          }
-          if (points_possible = 0 ) {
-            throw new Error('Cannot divide by 0');
-          }
-        }
-        let dueDate = new Date(assignment.due_at);
-        let currentDate = new Date();
-          if (currentDate > AssignmentGroup['assignments']].due_at){
-            //skip assignment if it isn't due
-            return;
-          }
-          //calculate the average score per learner
-        let score = function(submission.score, points_possible) {
-            return submission.score / points_possible;
-            //
-            console.log(learner_id)
+     }
+     // graceful error messages
+     
+     //throws an error when there is a course_id mismatch
+     if (AssignmentGroup.course_id != CourseInfo.id ) {
+         throw new Error('Does not match');
+       }
+       //throws an error when dividinf by zero for points possible
+       if (points_possible = 0 ) {
+         throw new Error('Cannot divide by 0');
+       }
 
-    }
+       let dueDate = new Date(AssignmentGroup.assignments.due_at);
+       let currentDate = new Date();
+         if (currentDate > AssignmentGroup.assignments.due_at){
+           //skip assignment if it isn't due
+           return;
+         }
+     
+  function getLearnerData(course, ag, submissions) {
+    // here, we would process this data to achieve the desired result.
+//attempting to push the functions ag1 and ag2 into an object within an array
+  let array = [];
+  if (ag1 || ag2){
+	array.push([ag1, ag2]);
+}
 
-
-    //test case: to demonstrate the desired output; not final code
-            // here, we would process this data to achieve the desired result.
-        // Our code here, manioulate the data, do not change it
-        // Does not have to be in a specific order
-        function getLearnerData(course, ag, submissions) {
-            // here, we would process this data to achieve the desired result.
-            //         // here, we would process this data to achieve the desired result.
-//         // Our code here, manioulate the data, do not change it
-//         //Does not have to be in a specific order
-            (CourseInfo, AssignmentGroup, [LearnerSubmission])
-        
-        //if the assignment is past due then deduct 10%
-        function name(submission, due_at) {
-            if(submitted_at != due_at){
-                let late =  .10;
-                console.log(late)
-                    return Math.max(submission - (submission * late), 0);
-                }
-        }
-        
-            // graceful error messages
-            if (course_id != CourseInfo.id ) {
-                throw new Error('Does not match');
-            }
-            if (points_possible = 0 ) {
-                throw new Error('Cannot divide by 0');
-            }
-            
-            function weightedAverage(params) {
-                
-            }
-
-        //let score = function(LearnerSubmission.score, points_possible) {
-        return submission.score / points_possible;
-
-        }
-
-    LearnerSubmissions.forEach((LearnerSubmission) => {
-        //console.log(LearnerSubmission.score)
-
-
-
-    })
-          
-          //}
-
-          
-          const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-          
-          console.log(result);
-          
-        //   Test result
-        //   const result = [
-        //     {
-        //       id: 125,
-        //       avg: 0.985, // (47 + 150) / (50 + 150)
-        //       1: 0.94, // 47 / 50
-        //       2: 1.0 // 150 / 150
-        //     },
-        //     {
-        //       id: 132,
-        //       avg: 0.82, // (39 + 125) / (50 + 150)
-        //       1: 0.78, // 39 / 50
-        //       2: 0.833 // late: (140 - 15) / 150
-        //     }
-        //   ];
+console.log(array)
+    //return the average scores per assignment for each student
+    return ag1
+    return ag2
+  
+  }
+  
+  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+  
+  //console.log(result);
+  
+//   let arrayOfObj = [
+//     {id: "1", name: "mary", age:25 },
+//     {id: "2", name: "leo", age:24 },
+//     {id: "3", name: "zach", age:3 },
+//     {id: "4", name: "lucky", age:2 }
+//   ]
+// let a = (arrayOfObj[1].age)
+// let b = (arrayOfObj[3].age)
+//   //console.log(arrayOfObj[1].age);
+//   console.log(b);
+//   console.log(a/b);
